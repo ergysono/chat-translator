@@ -16,7 +16,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <ClientProviders>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={`${inter.className}`}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
