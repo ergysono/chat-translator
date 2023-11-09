@@ -1,23 +1,21 @@
+import {authOptions} from "@/auth";
 import PricingCards from "@/components/PricingCards";
+import {getServerSession} from "next-auth";
 
-function PricingPage() {
+async function Register() {
+  const session = await getServerSession(authOptions);
+  const name = session?.user?.name?.split(" ")[0];
+
   return (
-    <div className="isolate overflow-hidden dark:bg-gray-900 pb-24">
-      <div className="mx-auto max-w-7xl px-6 pb-12 pt-26 text-center sm:pt-12 lg:px-8">
+    <div className="isolate overflow-hidden dark:bg-gray-900 pb-40">
+      <div className="mx-auto max-w-7xl px-6 pb-12 pt-16 text-center lg:px-8">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-base font-semibold leading-7 text-indigo-400">
-            Pricing
-          </h2>
           <p className="mt-2 text-4xl font-bold tracking-tight text-slate-900 dark:text-white  sm:text-5xl">
-            The right price for you,{" "}
-            <br className="hidden sm:inline lg:hidden" />
-            whoever you are
+            Lets handle your Membership{" "}
+            {name?.charAt(0).toUpperCase() + "" + name?.slice(1)}
           </p>
         </div>
-        <div className="relative mt-6">
-          <p className="mx-auto max-w-2xl text-lg leading-8 text-slate-900/60 dark:text-white/60">
-            We are 99% sure we have a plan to match 100% of your needs
-          </p>
+        <div className="relative">
           <svg
             viewBox="0 0 1208 1024"
             className="absolute -top-10 left-1/2 -z-10 h-[64rem] -translate-x-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:-top-12 md:-top-20 lg:-top-12 xl:top-0"
@@ -38,9 +36,10 @@ function PricingPage() {
           </svg>
         </div>
       </div>
-      <PricingCards redirect={true} />
+
+      <PricingCards redirect={false} />
     </div>
   );
 }
 
-export default PricingPage;
+export default Register;
