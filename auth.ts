@@ -17,10 +17,9 @@ export const authOptions: NextAuthOptions = {
           session.user.id = token.sub;
 
           const firebaseToken = await adminAuth.createCustomToken(token.sub);
-          session.firbaseToken = firebaseToken;
+          session.firebaseToken = firebaseToken;
         }
       }
-
       return session;
     },
     jwt: async ({user, token}) => {
