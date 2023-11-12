@@ -4,10 +4,19 @@ import {db} from "@/firebase";
 import {addDoc, collection, onSnapshot} from "firebase/firestore";
 import {useSession} from "next-auth/react";
 import {useState} from "react";
+import LoadingSpinner from "./LoadingSpinner";
+import {useSubscriptionStore} from "@/store/store";
+import ManageAccountButton from "./ManageAccountButton";
 
 function CheckoutButton() {
   const {data: session} = useSession();
   const [loading, setLoading] = useState(false);
+  const subscription = useSubscriptionStore((state) => state.subscription);
+
+  const isLoadingSubscription = subscription === undefined;
+
+  const isSubscribed =
+    subscription?.status === "active" && subscription?.role === "pro";
 
   const createCheckoutSession = async () => {
     if (!session?.user.id) {
@@ -43,13 +52,18 @@ function CheckoutButton() {
   };
   return (
     <div className="flex flex-col space-y-2">
-      <button
-        onClick={() => createCheckoutSession()}
+      <div
         className="mt-8 block rounded-md bg-indigo-600 px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline
               focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer"
       >
-        {loading ? "loading" : "Sign Up"}
-      </button>
+        {isSubscribed ? (
+          <ManageAccountButton />
+        ) : isLoadingSubscription || loading ? (
+          <LoadingSpinner />
+        ) : (
+          <button onClick={() => createCheckoutSession()}>Sign Up</button>
+        )}
+      </div>
     </div>
   );
 }
