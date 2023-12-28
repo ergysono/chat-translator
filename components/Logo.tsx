@@ -1,4 +1,4 @@
-import LogoImage from "@logos/black.svg";
+import LogoImage from "@logos/ohmychat.png";
 import Link from "next/link";
 import {AspectRatio} from "./ui/aspect-ratio";
 import Image from "next/image";
