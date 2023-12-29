@@ -1,5 +1,4 @@
 import ChatList from "@/components/ChatList";
-import React from "react";
 
 type Props = {
   params: {};
@@ -8,7 +7,11 @@ type Props = {
   };
 };
 function ChatsPage() {
-  return <ChatList />;
+  return (
+    <div>
+      <ChatList />
+    </div>
+  );
 }
 
 export default ChatsPage;
