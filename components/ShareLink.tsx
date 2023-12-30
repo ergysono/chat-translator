@@ -27,7 +27,10 @@ function ShareLink({
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) {
   const {toast} = useToast();
-  const host = window.location.host;
+  let host = null;
+  if (typeof window !== "undefined") {
+    host = window.location.host;
+  }
   const linkToChat =
     process.env.NODE_ENV === "development"
       ? `http://${host}/chat/${chatId}`

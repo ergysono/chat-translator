@@ -61,4 +61,4 @@ export const sortedMessagesRef = (chatId: string) =>
   query(messagesRef(chatId), orderBy("timestamp", "asc"));
 
 export const limitedSortedMessagesRef = (chatId: string) =>
-  query(query(messagesRef(chatId), limit(25)), orderBy("timestamp", "desc"));
+  query(query(messagesRef(chatId), limit(1)), orderBy("timestamp", "desc"));

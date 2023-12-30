@@ -49,7 +49,6 @@ function ChatMessages({
 
       {messages?.map((message) => {
         const isSender = message.user.id === session?.user.id;
-
         return (
           <div key={message.id} className="flex my-2 items-end">
             <div
